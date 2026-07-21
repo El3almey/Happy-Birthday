@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday - Nourgeous Accessories</title>
+<meta name="description" content="A luxury interactive birthday gift experience.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Montserrat:wght@300;400;500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================= LOADING SCREEN ================= -->
+<div class="loading-screen" id="loadingScreen" aria-hidden="true">
+  <div class="loading-logo">
+    <img src="images/logo.png" alt="" class="logo-img" onerror="this.style.display='none'; this.parentElement.classList.add('no-logo')">
+    <span class="logo-fallback">N</span>
+  </div>
+  <div class="loading-bar"><span></span></div>
+  <p class="loading-text">preparing something beautiful</p>
+</div>
+
+<!-- Background ambience canvas & glow -->
+<canvas id="ambience" aria-hidden="true"></canvas>
+<div class="mouse-glow" id="mouseGlow" aria-hidden="true"></div>
+
+<main id="mainContent">
+
+  <!-- ================= SCENE 1: WAX SEAL ================= -->
+  <section class="scene scene-seal" id="sceneSeal">
+    <div class="seal-frame-outer">
+      <div class="corner-ornament tl"></div>
+      <div class="corner-ornament tr"></div>
+      <div class="corner-ornament bl"></div>
+      <div class="corner-ornament br"></div>
+
+      <button class="wax-seal-btn" id="waxSeal" aria-label="Tap to Open">
+        <div class="wax-seal-inner">
+          <span class="brand-year left">EST</span>
+          <div class="brand-crystal">✦</div>
+          <span class="brand-year right">2022</span>
+          <div class="brand-name">Nourgeous</div>
+          <div class="brand-sub">Accessories</div>
+        </div>
+      </button>
+
+      <div class="tap-container">
+        <div class="dashed-arrow"></div>
+        <div class="tap-btn-pill">Tap to Open</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SCENE 2: ENVELOPE + LETTER ================= -->
+  <section class="scene scene-envelope" id="sceneEnvelope">
+    <div class="balloons" aria-hidden="true">
+      <span class="balloon b1"></span><span class="balloon b2"></span><span class="balloon b3"></span>
+    </div>
+    <h2 class="headline gold-script">Happy Birthday Love!</h2>
+
+    <div class="envelope-wrap">
+      <div class="envelope" id="envelopeBox">
+        <div class="envelope-back"></div>
+        <div class="letter" id="theLetter">
+          <div class="brand-crystal-crest">✦</div>
+          <div class="letter-brand-header">NOURGEOUS</div>
+          <div class="letter-brand-sub">ACCESSORIES</div>
+          <p class="letter-line" data-line style="margin-top:20px;">Wishing you a day as beautiful and radiant as you are. ❤️</p>
+          <p class="letter-line letter-signoff" data-line>Happy Birthday My Love ❤️<br>With all my love, Yours Always.</p>
+        </div>
+        <div class="envelope-flap"></div>
+        <div class="envelope-front"></div>
+      </div>
+    </div>
+    <button class="ghost-btn scroll-cue" id="toMoments">Continue <i class="fa-solid fa-arrow-down"></i></button>
+  </section>
+
+  <!-- ================= SCENE 3: MOMENTS ================= -->
+  <section class="scene scene-moments" id="sceneMoments">
+    <p class="eyebrow">✦ Moments ✦</p>
+    <h2 class="headline gold-script">Every picture tells a story...</h2>
+    <p class="subtitle">And every story with you is beautiful.</p>
+
+    <div class="polaroid-grid" id="momentsGrid">
+      <figure class="polaroid" data-rot="-6"><div class="ph"><img src="images/moments/1.png" alt="Moment 1" onerror="this.parentElement.classList.add('ph-empty')"></div></figure>
+      <figure class="polaroid" data-rot="4"><div class="ph"><img src="images/moments/2.png" alt="Moment 2" onerror="this.parentElement.classList.add('ph-empty')"></div></figure>
+      <figure class="polaroid" data-rot="-3"><div class="ph"><img src="images/moments/3.png" alt="Moment 3" onerror="this.parentElement.classList.add('ph-empty')"></div></figure>
+      <figure class="polaroid" data-rot="7"><div class="ph"><img src="images/moments/4.png" alt="Moment 4" onerror="this.parentElement.classList.add('ph-empty')"></div></figure>
+      <figure class="polaroid" data-rot="-8"><div class="ph"><img src="images/moments/5.png" alt="Moment 5" onerror="this.parentElement.classList.add('ph-empty')"></div></figure>
+    </div>
+  </section>
+
+  <!-- ================= SCENE 4: MUSIC ================= -->
+  <section class="scene scene-music" id="sceneMusic">
+    <p class="eyebrow">✦ A Song For You ✦</p>
+    <h3 class="play-sub-title">PLAY OUR SONG</h3>
+
+    <div class="player-panel">
+      <div class="vinyl-wrap">
+        <div class="vinyl" id="vinyl">
+          <div class="vinyl-label">
+            <div class="wax-seal-inner mini">
+              <span class="brand-name">N</span>
+            </div>
+          </div>
+        </div>
+        <div class="tonearm" id="tonearm"></div>
+      </div>
+
+      <div class="player-info">
+        <p class="song-name" id="songName">Nefsy Ahbek</p>
+        <p class="song-artist">Our Song</p>
+
+        <div class="progress-row">
+          <span class="time" id="curTime">01:02</span>
+          <input type="range" id="seek" class="seek" min="0" max="100" value="30" aria-label="Seek">
+          <span class="time" id="durTime">03:45</span>
+        </div>
+
+        <div class="player-controls">
+          <button class="ctrl-btn" id="likeBtn" aria-label="Like"><i class="fa-regular fa-heart"></i></button>
+          <button class="ctrl-btn" id="prevBtn" aria-label="Restart"><i class="fa-solid fa-backward-step"></i></button>
+          <button class="ctrl-btn play-main" id="playBtn" aria-label="Play"><i class="fa-solid fa-play"></i></button>
+          <button class="ctrl-btn" id="nextBtn" aria-label="Next"><i class="fa-solid fa-forward-step"></i></button>
+          <div class="volume-row">
+            <i class="fa-solid fa-volume-low"></i>
+            <input type="range" id="volume" min="0" max="1" step="0.01" value="0.7" aria-label="Volume">
+          </div>
+        </div>
+        <div class="wave-bars" id="waveBars" aria-hidden="true"></div>
+      </div>
+    </div>
+    <audio id="audio" src="music/nefsy-ahbek.mp3" preload="metadata"></audio>
+  </section>
+
+  <!-- ================= SCENE 5: US ================= -->
+  <section class="scene scene-us" id="sceneUs">
+    <h2 class="headline gold-script">Us ♥</h2>
+
+    <div class="floating-hearts" aria-hidden="true">
+      <span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span>
+    </div>
+
+    <div class="heart-collage-container" id="usGrid">
+      <!-- Polaroids dynamically placed or structured in a heart shape -->
+      <figure class="polaroid p-heart h1"><div class="ph"><img src="images/us/1.png" alt="Us 1" onerror="this.parentElement.classList.add('ph-empty')"></div></figure>
+      <figure class="polaroid p-heart h2"><div class="ph"><img src="images/us/2.png" alt="Us 2" onerror="this.parentElement.classList.add('ph-empty')"></div></figure>
+      <figure class="polaroid p-heart h3"><div class="ph"><img src="images/us/3.png" alt="Us 3" onerror="this.parentElement.classList.add('ph-empty')"></div></figure>
+      <figure class="polaroid p-heart h4"><div class="ph"><img src="images/us/4.png" alt="Us 4" onerror="this.parentElement.classList.add('ph-empty')"></div></figure>
+      <figure class="polaroid p-heart h5"><div class="ph"><img src="images/us/1.png" alt="Us 5" onerror="this.parentElement.classList.add('ph-empty')"></div></figure>
+      <figure class="polaroid p-heart h6"><div class="ph"><img src="images/us/2.png" alt="Us 6" onerror="this.parentElement.classList.add('ph-empty')"></div></figure>
+      <figure class="polaroid p-heart h7"><div class="ph"><img src="images/us/3.png" alt="Us 7" onerror="this.parentElement.classList.add('ph-empty')"></div></figure>
+      <figure class="polaroid p-heart h8"><div class="ph"><img src="images/us/4.png" alt="Us 8" onerror="this.parentElement.classList.add('ph-empty')"></div></figure>
+    </div>
+  </section>
+
+  <!-- ================= SCENE 6: ENDING ================= -->
+  <section class="scene scene-ending" id="sceneEnding">
+    <div class="floral-card">
+      <div class="brand-crystal-crest">✦</div>
+      <div class="letter-brand-header">NOURGEOUS</div>
+      <div class="letter-brand-sub">ACCESSORIES</div>
+      
+      <h2 class="ending-card-title">Happy Birthday</h2>
+      
+      <p class="ending-card-body">
+        You deserve all the happiness<br>
+        in the world and more.<br>
+        I'm so lucky to have you.<br>
+        Today, we celebrate you!
+      </p>
+
+      <div class="card-heart-icon">♥</div>
+      
+      <button class="gold-btn" id="finalSurpriseBtn" style="margin-top: 25px;"><i class="fa-solid fa-heart"></i> One Last Surprise</button>
+    </div>
+  </section>
+
+  <!-- ================= FINAL SURPRISE OVERLAY ================= -->
+  <div class="final-overlay" id="finalOverlay" aria-hidden="true">
+    <div class="final-photos" id="finalPhotos"></div>
+    <div class="final-text">
+      <p class="final-line">I Fell In Love With You...</p>
+      <p class="final-line final-line-2">And I'd Do It Again Every Single Day.</p>
+    </div>
+    <button class="ghost-btn close-final" id="closeFinal" aria-label="Close">✕</button>
+  </div>
+
+</main>
+
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.3/confetti.browser.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
